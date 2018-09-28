@@ -1,20 +1,14 @@
 import { Router, Request, Response } from 'express';
-import * as request from 'request-promise-native';
+import { NextFunction } from 'connect';
 
-const router: Router = Router();
-const SSO_URL = 'https://sso-qa2.tcsbank.ru/authorize?client_id=cashier';
-
-const request_options = {
-    host: SSO_URL,
-    headers: {
-        'user-agent': 'Mozilla/5.0'
+export class IndexRoute {
+    static create(router: Router) {
+        router.get('/', (req: Request, res: Response, next: NextFunction) => {
+            new IndexRoute().index(req, res, next);
+        });
     }
-};
 
-router.get('/', async (req: Request, res: Response) => {
-    const response = await request(request_options);
-    // res.status(500).json({response, "status": "299"});
-    res.status(200).json({'test': 'test'});
-});
-
-export const IndexRoute: Router = router;
+    index(req: Request, res: Response, next: NextFunction) {
+        res.status(200).json({test: 'text index asdrute'});
+    }
+}

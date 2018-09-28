@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "dev": "ts-node -w ./app/server.ts",
-    "start": "concurrently \"tcs --watch ./app/*\" \"nodemon ./dist/server.js\"",
+    "watch": "npm run build && concurrently \"tsc --watch\" \"npm run start\"",
+    "start": "nodemon ./dist/server.js",
     "prod": "npm run build && npm run start"
   },
   "keywords": [],
@@ -19,10 +20,13 @@
     "@types/node": "^10.11.2",
     "body-parser": "^1.18.3",
     "concurrently": "^4.0.1",
+    "curl-request": "^1.1.1",
     "express": "^4.16.3",
     "node-fetch": "^2.2.0",
     "nodemon": "^1.18.4",
+    "querystring": "^0.2.0",
     "request": "^2.88.0",
+    "request-promise": "^4.2.2",
     "request-promise-native": "^1.0.5",
     "typescript": "^3.1.1"
   }

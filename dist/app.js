@@ -6,12 +6,17 @@ const routes_1 = require("./routes");
 class App {
     constructor() {
         this.app = express();
-        this.setup();
+        this.setupMiddlewares();
+        this.setRoutes();
     }
-    setup() {
+    setupMiddlewares() {
         this.app.use(bodyParser.json());
         this.app.use(bodyParser.urlencoded({ extended: false }));
-        this.app.use('/', routes_1.IndexRoute);
+    }
+    setRoutes() {
+        const router = express.Router();
+        routes_1.IndexRoute.create(router);
+        this.app.use(router);
     }
 }
 exports.App = App;
